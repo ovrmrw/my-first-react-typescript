@@ -11,7 +11,7 @@ export class Disposer {
 
 
   disposeSubscription(): void {
-    this.subs.forEach(sub => sub.unsubscribe)
+    this.subs.forEach(sub => sub.unsubscribe())
   }
 
 }
