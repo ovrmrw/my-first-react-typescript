@@ -1,33 +1,30 @@
 import * as React from 'react'
-import { Observable, Subscription } from 'rxjs'
 
 const logo = require('./logo.svg')
 import './App.css'
 
-import { Disposer } from './disposer'
-import { AppProps } from './index'
-import { SimpleStore } from './simple-store'
-import { initialState, KEY, AppState, IncrementState } from './state'
+import { Disposer } from './lib/disposer'
+import { getStore, initialState, KEY, AppState, IncrementState } from './store'
 
 
-export class App extends React.Component<AppProps, AppState> {
-  private store: SimpleStore<AppState>
+export class App extends React.Component<{}, Partial<AppState>> {
+  private store = getStore()
   private dis = new Disposer()
 
 
   constructor(props) {
     super(props)
-    this.store = this.props.store
     this.state = initialState
   }
 
 
   componentDidMount() {
-    this.dis.disposable = this.store.getState()
-      .filterByUpdatedKey(KEY.increment)
+    this.dis.disposable = this.store.getter()
+      .filterByUpdatedKey(KEY.increment, KEY.lastUpdated)
       .subscribe(state => {
         this.setState({
           increment: state.increment,
+          lastUpdated: state.lastUpdated,
         })
       })
   }
@@ -38,28 +35,33 @@ export class App extends React.Component<AppProps, AppState> {
   }
 
 
-  increment(event) {
-    this.store.setState(KEY.increment, (p) => ({ counter: p.counter + 1 }))
-      .then(state => this.store.setState(KEY.increment, incrementCallback))
-      .then(state => this.store.setState(KEY.increment, Promise.resolve(incrementCallback)))
-      .then(state => this.store.setState(KEY.increment, Observable.of(incrementCallback).delay(200)))
+  increment(event): Promise<any> {
+    return this.store.setter(KEY.increment, (p) => ({ counter: p.counter + 1 }))
+      .then(s => this.store.setter(KEY.increment, incrementCallback))
+      .then(s => this.store.setter(KEY.increment, Promise.resolve({ counter: s.increment.counter + 1 })))
+      .then(s => this.store.setter(KEY.increment, Promise.resolve(incrementCallback)))
+      .then(s => this.store.setter(KEY.lastUpdated, new Date().getTime()))
   }
 
 
-  decrement(event) {
-    this.store.setState(KEY.increment, (p) => ({ counter: p.counter - 1 }))
-      .then(state => this.store.setState(KEY.increment, decrementCallback))
-      .then(state => this.store.setState(KEY.increment, Promise.resolve(decrementCallback)))
-      .then(state => this.store.setState(KEY.increment, Observable.of(decrementCallback).delay(200)))
+  decrement(event): Promise<any> {
+    return this.store.setter(KEY.increment, (p) => ({ counter: p.counter - 1 }))
+      .then(s => this.store.setter(KEY.increment, decrementCallback))
+      .then(s => this.store.setter(KEY.increment, Promise.resolve({ counter: s.increment.counter - 1 })))
+      .then(s => this.store.setter(KEY.increment, Promise.resolve(decrementCallback)))
+      .then(s => this.store.setter(KEY.lastUpdated, new Date().getTime()))
+
   }
 
 
-  reset(event) {
-    this.store.setState(KEY.increment, { counter: 0 })
+  reset(event): Promise<any> {
+    return this.store.setter(KEY.increment, { counter: 0 })
   }
 
 
   render() {
+    const state = this.state as AppState
+
     return (
       <div className="App">
         <div className="App-header">
@@ -69,7 +71,8 @@ export class App extends React.Component<AppProps, AppState> {
         <button onClick={(e) => this.increment(e)}>Increment</button>
         <button onClick={(e) => this.decrement(e)}>Decrement</button>
         <button onClick={(e) => this.reset(e)}>Reset</button>
-        <h1>{this.state.increment.counter}</h1>
+        <h1>{state.increment.counter}</h1>
+        <div>lastUpdated: {state.lastUpdated}</div>
       </div>
     )
   }
