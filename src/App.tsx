@@ -22,7 +22,7 @@ export class App extends React.Component<{}, Partial<AppState>> {
   componentDidMount() {
     this.dis.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment)
-      .debounceTime(0)
+      .debounceTime(500)
       .subscribe(state => {
         this.setState({
           increment: state.increment,
