@@ -14,6 +14,7 @@ export class App extends React.Component<AppProps, AppState> {
   private store: SimpleStore<AppState>
   private dis = new Disposer()
 
+
   constructor(props) {
     super(props)
     this.store = this.props.store
