@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Subscription } from 'rxjs'
 
-import { Disposer } from './lib/disposer'
 import { getStore, initialState, AppState } from './store'
 
 
