@@ -4,7 +4,7 @@ import { StoreComponent } from './HOC'
 import { KEY, AppState, IncrementState } from './store'
 
 
-export class Increment extends StoreComponent<{}, Partial<AppState>> {
+export class Increment extends StoreComponent<{}, {}> {
   componentDidMount() {
     this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment, KEY.lastUpdated)

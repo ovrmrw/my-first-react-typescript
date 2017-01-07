@@ -8,14 +8,22 @@ import { Increment } from './increment'
 import { KEY, AppState } from './store'
 
 
-export class App extends StoreComponent<{}, Partial<AppState>> {
+interface StateForThisComponent {
+  x: number
+}
+
+
+export class App extends StoreComponent<{}, StateForThisComponent> {
   componentDidMount() {
+    let x = 0
+
     this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment)
       .debounceTime(500)
       .subscribe(state => {
         this.setState({
           increment: state.increment,
+          x: x++,
         })
       })
   }
@@ -27,13 +35,14 @@ export class App extends StoreComponent<{}, Partial<AppState>> {
 
 
   render() {
-    const s = this.state as AppState
+    const s = this.state as AppState & StateForThisComponent
 
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React {s.increment.counter}</h2>
+          <div>x: {s.x}</div>
         </div>
         <Increment />
       </div>
