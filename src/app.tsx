@@ -8,12 +8,28 @@ import { Increment } from './increment'
 import { KEY, AppState } from './store'
 
 
-interface StateForThisComponent {
-  updatedTimes: number
+interface ComponentState {
+  updatedTimes: {
+    value: number,
+    visible: boolean,
+  }
+}
+
+const componentState: ComponentState = {
+  updatedTimes: {
+    value: 0,
+    visible: false,
+  }
 }
 
 
-export class App extends StoreComponent<{}, Partial<StateForThisComponent>> {
+export class App extends StoreComponent<{}, Partial<ComponentState>> {
+  constructor(props) {
+    super(props)
+    this.mergeState(componentState)
+  }
+
+
   componentDidMount() {
     this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment)
@@ -29,7 +45,10 @@ export class App extends StoreComponent<{}, Partial<StateForThisComponent>> {
       .scan((p, _) => p + 1, 0)
       .subscribe(times => {
         this.setState({
-          updatedTimes: times,
+          updatedTimes: {
+            value: times,
+            visible: times > 9,
+          }
         })
       })
   }
@@ -41,14 +60,19 @@ export class App extends StoreComponent<{}, Partial<StateForThisComponent>> {
 
 
   render() {
-    const s = this.state as AppState & StateForThisComponent
+    const s = this.state as AppState & ComponentState
+
+    let updatedTimes: JSX.Element | null = null
+    if (s.updatedTimes.visible) {
+      updatedTimes = <div>store updated times: {s.updatedTimes.value}</div>
+    }
 
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React {s.increment.counter}</h2>
-          <div>store updated times: {s.updatedTimes}</div>
+          {updatedTimes}
         </div>
         <Increment />
       </div>

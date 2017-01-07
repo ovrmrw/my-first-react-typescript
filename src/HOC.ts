@@ -16,7 +16,12 @@ export abstract class StoreComponent<P, S> extends React.PureComponent<P, Partia
 
   constructor(props?, context?) {
     super(props, context)
-    this.state = initialState as any
+    this.state = { ...initialState as any }
+  }
+
+
+  mergeState(componentState: S): void {
+    this.state = { ...this.state as any, ...componentState as any }
   }
 
 
