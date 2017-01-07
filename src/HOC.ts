@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs'
 import { getStore, initialState, AppState } from './store'
 
 
-export class StoreComponent<P, S> extends React.Component<P, Partial<AppState>> {
+export abstract class StoreComponent<P, S> extends React.PureComponent<P, Partial<AppState>> {
   store = getStore()
 
   private subs: Subscription[] = []
@@ -23,5 +23,10 @@ export class StoreComponent<P, S> extends React.Component<P, Partial<AppState>> 
   disposeSubscriptions(): void {
     this.subs.forEach(sub => sub.unsubscribe())
   }
+
+
+  abstract componentDidMount()
+
+  abstract componentWillUnmount()
 
 }
