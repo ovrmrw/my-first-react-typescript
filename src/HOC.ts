@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs'
 import { getStore, initialState, AppState } from './store'
 
 
-export abstract class StoreComponent<P, S> extends React.Component<P, Partial<AppState> & S> {
+export abstract class StoreComponent<P, S> extends React.PureComponent<P, Partial<AppState> & S> {
   store = getStore()
 
   private subs: Subscription[] = []

@@ -9,21 +9,27 @@ import { KEY, AppState } from './store'
 
 
 interface StateForThisComponent {
-  x: number
+  updatedTimes: number
 }
 
 
-export class App extends StoreComponent<{}, StateForThisComponent> {
+export class App extends StoreComponent<{}, Partial<StateForThisComponent>> {
   componentDidMount() {
-    let x = 0
-
     this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment)
       .debounceTime(500)
       .subscribe(state => {
         this.setState({
           increment: state.increment,
-          x: x++,
+        })
+      })
+
+    this.disposable = this.store.getter()
+      .filterByUpdatedKey(KEY.increment, KEY.lastUpdated)
+      .scan((p, _) => p + 1, 0)
+      .subscribe(times => {
+        this.setState({
+          updatedTimes: times,
         })
       })
   }
@@ -42,7 +48,7 @@ export class App extends StoreComponent<{}, StateForThisComponent> {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React {s.increment.counter}</h2>
-          <div>x: {s.x}</div>
+          <div>store updated times: {s.updatedTimes}</div>
         </div>
         <Increment />
       </div>
