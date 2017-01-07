@@ -1,22 +1,12 @@
 import * as React from 'react'
 
-import { Disposer } from './lib/disposer'
-import { getStore, initialState, KEY, AppState, IncrementState } from './store'
+import { StoreComponent } from './HOC'
+import { KEY, AppState, IncrementState } from './store'
 
 
-export class Increment extends React.Component<{}, Partial<AppState>> {
-  private store = getStore()
-  private dis = new Disposer()
-
-
-  constructor(props) {
-    super(props)
-    this.state = initialState
-  }
-
-
+export class Increment extends StoreComponent<{}, Partial<AppState>> {
   componentDidMount() {
-    this.dis.disposable = this.store.getter()
+    this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment, KEY.lastUpdated)
       .debounceTime(0)
       .subscribe(state => {
@@ -29,7 +19,7 @@ export class Increment extends React.Component<{}, Partial<AppState>> {
 
 
   componentWillUnmount() {
-    this.dis.disposeSubscription()
+    this.disposeSubscriptions()
   }
 
 
