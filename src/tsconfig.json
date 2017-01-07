@@ -10,11 +10,7 @@
       "es2017",
       "dom"
     ],
-    "typeRoots": [
-      "node_modules/@types"
-    ]
-  },
-  "include": [
-    "src/**/*"
-  ]
+    "strictNullChecks": true,
+    "skipLibCheck": true
+  }
 }

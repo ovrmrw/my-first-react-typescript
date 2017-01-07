@@ -48,7 +48,6 @@ export class Increment extends React.Component<{}, Partial<AppState>> {
       .then(s => this.store.setter(KEY.increment, Promise.resolve({ counter: s.increment.counter - 1 })))
       .then(s => this.store.setter(KEY.increment, Promise.resolve(decrementCallback)))
       .then(s => this.store.setter(KEY.lastUpdated, new Date().getTime()))
-
   }
 
 

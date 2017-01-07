@@ -46,6 +46,7 @@
     "source-map-loader": "^0.1.5",
     "strip-ansi": "3.0.1",
     "style-loader": "0.13.1",
+    "tslint": "^4.3.1",
     "typescript": "^2.1.4",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
@@ -61,7 +62,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "tsc": "tsc",
+    "lint": "tslint --type-check \"src/**/*.ts\" \"src/**/*.tsx\" "
   },
   "jest": {
     "collectCoverageFrom": [

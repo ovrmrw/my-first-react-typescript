@@ -1,7 +1,7 @@
 // import { Injectable, NgZone, Inject, Optional } from '@angular/core'
 import { Observable, Subject, BehaviorSubject } from 'rxjs'
 
-import { Action, ValueOrResolver } from './common'
+import { Action, ValueOrResolver, RecursiveReadonly } from './common'
 
 import './add/operator/all'
 
@@ -14,7 +14,7 @@ export class SimpleStore<T> {
   private provider$: BehaviorSubject<T | RecursiveReadonly<T>>
 
 
-  constructor(    
+  constructor(
     private initialState: T,
     private concurrent?: number,
   ) {
@@ -56,7 +56,7 @@ export class SimpleStore<T> {
       .subscribe(newState => {
         console.log('newState:', newState)
         // this.zone.run(() => {
-          this.provider$.next(newState)
+        this.provider$.next(newState)
         // })
         this.effectAfterReduced(newState)
       })
@@ -93,6 +93,3 @@ export class SimpleStore<T> {
 
 
 
-type RecursiveReadonly<T> = {
-  readonly[P in keyof T]: RecursiveReadonly<T[P]>
-}

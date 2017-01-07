@@ -31,3 +31,8 @@ export function mergeObject<T>(obj: T, partials: Partial<{[P in keyof T]: T[P]}>
 
 
 export type ObjectKeys<T> = {[P in keyof T]: P}
+
+
+export type RecursiveReadonly<T> = {
+  readonly[P in keyof T]: RecursiveReadonly<T[P]>
+}
