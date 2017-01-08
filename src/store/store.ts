@@ -1,5 +1,5 @@
-import { SimpleStore } from '../lib/simple-store';
-import { initialState, AppState } from './state';
+import { SimpleStore } from '../lib/simple-store'
+import { initialState, AppState } from './state'
 
 
 let store: SimpleStore<AppState>

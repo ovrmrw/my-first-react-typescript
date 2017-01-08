@@ -1,10 +1,8 @@
 import * as React from 'react'
 import { Subscription } from 'rxjs'
 
-import { getStore, initialState, AppState } from '../store'
 
-
-export abstract class MyReactComponent<P, S> extends React.PureComponent<P, S> {
+export abstract class MyReactPureComponent<P, S> extends React.PureComponent<P, S> {
   private subs: Subscription[] = []
 
   set disposable(sub: Subscription) {

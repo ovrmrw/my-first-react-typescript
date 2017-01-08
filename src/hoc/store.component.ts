@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Subscription } from 'rxjs'
 
-import { MyReactComponent } from './my-react.component';
+import { MyReactPureComponent } from './my-react.component'
 import { getStore, initialState, AppState } from '../store'
 
 
-export abstract class StoreComponent<P, S> extends MyReactComponent<P, AppState & S> {
+export abstract class StoreComponent<P, S> extends MyReactPureComponent<P, AppState & S> {
   store = getStore()
 
 
