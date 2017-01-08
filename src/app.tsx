@@ -62,9 +62,9 @@ export class App extends StoreComponent<{}, ComponentState> {
   render() {
     const s = this.state
 
-    let updatedTimes: JSX.Element | null = null
+    let updatedTimesElement: JSX.Element | null = null
     if (s.updatedTimes.visible) {
-      updatedTimes = <div>store updated times: {s.updatedTimes.value}</div>
+      updatedTimesElement = <div>store updated times: {s.updatedTimes.value}</div>
     }
 
     return (
@@ -72,7 +72,7 @@ export class App extends StoreComponent<{}, ComponentState> {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React {s.increment.counter}</h2>
-          {updatedTimes}
+          {updatedTimesElement}
         </div>
         <Increment />
       </div>
