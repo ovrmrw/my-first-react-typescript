@@ -6,6 +6,8 @@ My first React app using TypeScript 2.1
 ### Setup
 
 ```
+$ yarn install
+or
 $ npm install
 ```
 
