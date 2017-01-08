@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { StoreComponent } from './hoc'
-import { KEY, AppState, IncrementState } from './store'
+import { KEY, IncrementState } from './store'
 
 
 export class Increment extends StoreComponent<{}, {}> {

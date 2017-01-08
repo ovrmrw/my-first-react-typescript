@@ -5,7 +5,7 @@ import './app.css'
 
 import { StoreComponent } from './hoc'
 import { Increment } from './increment'
-import { KEY, AppState } from './store'
+import { KEY } from './store'
 
 
 interface ComponentState {
