@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { StoreComponent } from './HOC'
+import { StoreComponent } from './hoc'
 import { KEY, AppState, IncrementState } from './store'
 
 
@@ -47,7 +47,7 @@ export class Increment extends StoreComponent<{}, {}> {
 
 
   render() {
-    const s = this.state as AppState
+    const s = this.state
 
     return (
       <div>

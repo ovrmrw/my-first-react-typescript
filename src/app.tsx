@@ -3,7 +3,7 @@ import * as React from 'react'
 const logo = require('./logo.svg')
 import './app.css'
 
-import { StoreComponent } from './HOC'
+import { StoreComponent } from './hoc'
 import { Increment } from './increment'
 import { KEY, AppState } from './store'
 
@@ -23,7 +23,7 @@ const componentState: ComponentState = {
 }
 
 
-export class App extends StoreComponent<{}, Partial<ComponentState>> {
+export class App extends StoreComponent<{}, ComponentState> {
   constructor(props) {
     super(props)
     this.mergeState(componentState)
@@ -60,7 +60,7 @@ export class App extends StoreComponent<{}, Partial<ComponentState>> {
 
 
   render() {
-    const s = this.state as AppState & ComponentState
+    const s = this.state
 
     let updatedTimes: JSX.Element | null = null
     if (s.updatedTimes.visible) {

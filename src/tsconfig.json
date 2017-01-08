@@ -1,15 +1,7 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "outDir": ".dest-tsc",
     "sourceMap": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "target": "es5",
-    "jsx": "react",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
     "strictNullChecks": true,
     "skipLibCheck": true
   }

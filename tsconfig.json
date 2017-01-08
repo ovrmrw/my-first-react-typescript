@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "outDir": ".dest-tsc",
-    "sourceMap": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
@@ -12,7 +11,13 @@
     ],
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    "baseUrl": "",
+    "paths": {
+      "react": [
+        "custom-types/react"
+      ]
+    }
   },
   "include": [
     "src/**/*"
