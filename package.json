@@ -30,6 +30,7 @@
     "file-loader": "0.9.0",
     "filesize": "3.3.0",
     "fs-extra": "0.30.0",
+    "gh-pages": "^0.12.0",
     "gzip-size": "3.0.0",
     "html-webpack-plugin": "2.24.0",
     "http-proxy-middleware": "0.17.2",
@@ -63,8 +64,10 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "tsc": "tsc",
-    "lint": "tslint --type-check \"src/**/*.ts\" \"src/**/*.tsx\" "
+    "lint": "tslint --type-check \"src/**/*.ts\" \"src/**/*.tsx\" ",
+    "deploy": "npm run build && gh-pages -d build"
   },
+  "homepage": "https://ovrmrw.github.io/my-first-react-typescript",
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"

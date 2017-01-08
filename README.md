@@ -1,6 +1,8 @@
 # my-first-react-typescript
 My first React app using TypeScript 2.1
 
+[Demo on GitHub Pages](https://ovrmrw.github.io/my-first-react-typescript/)
+
 ---
 
 ### Setup
@@ -15,6 +17,12 @@ $ npm install
 
 ```
 $ npm start
+```
+
+### Deploy
+
+```
+$ npm run deploy
 ```
 
 ---
