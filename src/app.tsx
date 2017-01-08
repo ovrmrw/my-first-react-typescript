@@ -26,7 +26,7 @@ const componentState: ComponentState = {
 export class App extends StoreComponent<{}, ComponentState> {
   constructor(props) {
     super(props)
-    this.mergeState(componentState)
+    this.mergeStatesOnConstructor(componentState)
   }
 
 
