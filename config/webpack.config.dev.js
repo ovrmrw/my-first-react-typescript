@@ -158,7 +158,7 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        loader: "light-ts-loader"
+        loader: 'awesome-typescript-loader'
       }
     ]
   },
