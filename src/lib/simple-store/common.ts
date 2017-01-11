@@ -25,7 +25,7 @@ export type ValueOrResolver<T, K extends keyof T> =
 
 export function mergeObject<T>(obj: T, partials: Partial<{[P in keyof T]: T[P]}>[]): T {
   return partials.reduce<T>((p, partial) => {
-    return { ...<any>p, ...<any>partial }
+    return { ...p as any, ...partial as any }
   }, obj)
 }
 
@@ -40,7 +40,7 @@ export function getObjectKeys<T>(state: T): ObjectKeys<T> {
 }
 
 
-export type ObjectKey<T, P extends keyof T> = P
+export type ObjectKey<T, K extends keyof T> = K
 
 
 export type RecursiveReadonly<T> = {
