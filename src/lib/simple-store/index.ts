@@ -1,5 +1,5 @@
 // export * from './simple-store.module'
 export * from './actions'
 export { SimpleStore } from './simple-store'
-export { mergeObject, ObjectKeys, RecursiveReadonly } from './common'
+export { mergeObject, getObjectKeys, ObjectKeys, RecursiveReadonly } from './common'
 // export { isUpdatedKey } from './helper'
