@@ -1,9 +1,9 @@
-// import { Injectable, NgZone, Inject, Optional } from '@angular/core'
 require('setimmediate')
-const asap = require('asap')
+const asap = require('asap') as (func: Function) => void
+// import { Injectable, NgZone, Inject, Optional } from '@angular/core'
 import { Observable, Subject, BehaviorSubject } from 'rxjs'
 
-import { Action, ValueOrResolver, RecursiveReadonly } from './common'
+import { Action, ValueOrResolver, PartialValueOrResolver, RecursiveReadonly } from './common'
 
 import './add/operator/all'
 
@@ -41,13 +41,22 @@ export class SimpleStore<T> {
     const reduced$ =
       queue$
         .scan((state, action) => {
+          let temp: any
           if (action.value instanceof Function) {
-            state[action.key] = action.value.call(null, state[action.key])
+            temp = action.value.call(null, state[action.key])
           } else {
-            state[action.key] = action.value
+            temp = action.value
+          }
+          if (temp instanceof Object && !(temp instanceof Array)) {
+            state[action.key] = { ...state[action.key], ...temp }
+          } else {
+            state[action.key] = temp
           }
           state[latestUpdatedKey] = action.key
           const newState = Object.assign({}, state)
+          // setTimeout(() => {
+          //   action.subject.next(newState)
+          // }, 0)
           // setImmediate(() => {
           //   action.subject.next(newState)
           // })
@@ -79,6 +88,13 @@ export class SimpleStore<T> {
 
 
   setter<K extends keyof T>(key: K, value: ValueOrResolver<T, K>): Promise<T> { // TをRecursiveReadonly<T>にするとプロパティ名の一斉リネームが出来なくなる。
+    const subject = new Subject<T | RecursiveReadonly<T>>()
+    this.simpleStore$.next({ key, value, subject })
+    return subject.take(1).toPromise()
+  }
+
+
+  setterPartial<K extends keyof T>(key: K, value: PartialValueOrResolver<T, K>): Promise<T> { // TをRecursiveReadonly<T>にするとプロパティ名の一斉リネームが出来なくなる。
     const subject = new Subject<T | RecursiveReadonly<T>>()
     this.simpleStore$.next({ key, value, subject })
     return subject.take(1).toPromise()

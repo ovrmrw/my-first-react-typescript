@@ -3,7 +3,8 @@ import { ObjectKey } from '../lib/simple-store'
 
 export const initialState: AppState = {
   increment: {
-    counter: 0
+    counter: 0,
+    // other: 9,
   },
   lastUpdated: 0,
   other: 0,
@@ -28,5 +29,6 @@ export const otherKey: ObjectKey<AppState, 'other'> = 'other'
 
 
 export interface IncrementState {
-  counter: number
+  counter: number,
+  // other: number,
 }

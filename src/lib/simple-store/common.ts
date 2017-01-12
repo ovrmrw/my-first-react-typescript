@@ -23,6 +23,15 @@ export type ValueOrResolver<T, K extends keyof T> =
   Observable<ObjectValue<T, K>> | Observable<ObjectValueResolver<T, K>>
 
 
+type PartialObjectValue<T, K extends keyof T> = Partial<T[K]>
+type PartialObjectValueResolver<T, K extends keyof T> = (value: T[K]) => Partial<T[K]>
+
+export type PartialValueOrResolver<T, K extends keyof T> =
+  PartialObjectValue<T, K> | PartialObjectValueResolver<T, K> |
+  Promise<PartialObjectValue<T, K>> | Promise<PartialObjectValueResolver<T, K>> |
+  Observable<PartialObjectValue<T, K>> | Observable<PartialObjectValueResolver<T, K>>
+
+
 export function mergeObject<T>(obj: T, partials: Partial<{[P in keyof T]: T[P]}>[]): T {
   return partials.reduce<T>((p, partial) => {
     return { ...p as any, ...partial as any }
