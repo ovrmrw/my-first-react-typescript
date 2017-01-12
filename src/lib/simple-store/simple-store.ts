@@ -1,4 +1,5 @@
 // import { Injectable, NgZone, Inject, Optional } from '@angular/core'
+require('setimmediate')
 import { Observable, Subject, BehaviorSubject } from 'rxjs'
 
 import { Action, ValueOrResolver, RecursiveReadonly } from './common'
@@ -46,9 +47,9 @@ export class SimpleStore<T> {
           }
           state[latestUpdatedKey] = action.key
           const newState = Object.assign({}, state)
-          setTimeout(() => {
+          setImmediate(() => {
             action.subject.next(newState)
-          }, 0)
+          })
           return newState
         }, this.initialState as T)
 
