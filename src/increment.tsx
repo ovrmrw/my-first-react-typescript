@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Observable } from 'rxjs'
 
 import { StoreComponent } from './hoc'
 import { IncrementState, incrementKey, lastUpdatedKey } from './store'
@@ -25,18 +26,18 @@ export class Increment extends StoreComponent<{}, {}> {
 
   increment(event): Promise<any> {
     return this.store.setter(incrementKey, (p) => ({ counter: p.counter + 1 }))
-      .then(s => this.store.setter(incrementKey, incrementCallback))
+      .then(s => this.store.setter(incrementKey, incrementResolver))
       .then(s => this.store.setter(incrementKey, Promise.resolve({ counter: s.increment.counter + 1 })))
-      .then(s => this.store.setter(incrementKey, Promise.resolve(incrementCallback)))
+      .then(s => this.store.setter(incrementKey, Promise.resolve(incrementResolver)))
       .then(s => this.store.setter(lastUpdatedKey, new Date().getTime()))
   }
 
 
   decrement(event): Promise<any> {
     return this.store.setter(incrementKey, (p) => ({ counter: p.counter - 1 }))
-      .then(s => this.store.setter(incrementKey, decrementCallback))
+      .then(s => this.store.setter(incrementKey, decrementResolver))
       .then(s => this.store.setter(incrementKey, Promise.resolve({ counter: s.increment.counter - 1 })))
-      .then(s => this.store.setter(incrementKey, Promise.resolve(decrementCallback)))
+      .then(s => this.store.setter(incrementKey, Promise.resolve(decrementResolver)))
       .then(s => this.store.setter(lastUpdatedKey, new Date().getTime()))
   }
 
@@ -64,11 +65,11 @@ export class Increment extends StoreComponent<{}, {}> {
 
 
 
-function incrementCallback(state: IncrementState): IncrementState {
+function incrementResolver(state: IncrementState): IncrementState {
   return { counter: state.counter + 1 }
 }
 
 
-function decrementCallback(state: IncrementState): IncrementState {
+function decrementResolver(state: IncrementState): IncrementState {
   return { counter: state.counter - 1 }
 }
