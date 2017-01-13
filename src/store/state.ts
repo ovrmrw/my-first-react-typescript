@@ -1,4 +1,4 @@
-import { ObjectKey } from '../lib/simple-store'
+import { ObjectKey, getObjectKeys } from '../lib/simple-store'
 
 
 export const initialState: AppState = {
@@ -23,6 +23,8 @@ export interface AppState {
 //   lastUpdated: 'lastUpdated',
 //   other: 'other',
 // }
+export const KEY = getObjectKeys(initialState)
+
 export const incrementKey: ObjectKey<AppState, 'increment'> = 'increment'
 export const lastUpdatedKey: ObjectKey<AppState, 'lastUpdated'> = 'lastUpdated'
 export const otherKey: ObjectKey<AppState, 'other'> = 'other'
