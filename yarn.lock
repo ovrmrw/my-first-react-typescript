@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/bluebird@^3.0.37":
+  version "3.0.37"
+  resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.0.37.tgz#2e76b394aa9bea40d04241a31c0887a260283388"
+
 "@types/node@^6.0.57":
   version "6.0.58"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.58.tgz#7b3b7065f3cdf24e2349d35b68d2795cfa874553"
@@ -176,7 +180,7 @@ arrify@^1.0.0, arrify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
-asap@~2.0.3:
+asap@^2.0.5, asap@~2.0.3:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.5.tgz#522765b50c3510490e52d7dcfe085ef9ba96958f"
 
@@ -240,6 +244,17 @@ autoprefixer@6.5.1, autoprefixer@^6.3.1:
     num2fraction "^1.2.2"
     postcss "^5.2.4"
     postcss-value-parser "^3.2.3"
+
+awesome-typescript-loader@^3.0.0-beta.18:
+  version "3.0.0-beta.18"
+  resolved "https://registry.yarnpkg.com/awesome-typescript-loader/-/awesome-typescript-loader-3.0.0-beta.18.tgz#7a72b1cca9a2dca59794ab2a4133f779a3a221e7"
+  dependencies:
+    colors "^1.1.2"
+    enhanced-resolve "^2.3.0"
+    loader-utils "^0.2.16"
+    lodash "^4.13.1"
+    object-assign "^4.1.0"
+    source-map-support "^0.4.0"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -985,7 +1000,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@^3.4.6:
+bluebird@^3.4.6, bluebird@^3.4.7:
   version "3.4.7"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.4.7.tgz#f72d760be09b7f76d08ed8fae98b289a8d05fab3"
 
@@ -1754,6 +1769,15 @@ encoding@^0.1.11:
   resolved "https://registry.yarnpkg.com/encoding/-/encoding-0.1.12.tgz#538b66f3ee62cd1ab51ec323829d1f9480c74beb"
   dependencies:
     iconv-lite "~0.4.13"
+
+enhanced-resolve@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-2.3.0.tgz#a115c32504b6302e85a76269d7a57ccdd962e359"
+  dependencies:
+    graceful-fs "^4.1.2"
+    memory-fs "^0.3.0"
+    object-assign "^4.0.1"
+    tapable "^0.2.3"
 
 enhanced-resolve@~0.9.0:
   version "0.9.1"
@@ -3416,7 +3440,7 @@ lodash.pickby@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.pickby/-/lodash.pickby-4.6.0.tgz#7dea21d8c18d7703a27c704c15d3b84a67e33aff"
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.2, lodash@^4.16.4, lodash@^4.2.0, lodash@^4.3.0:
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.2, lodash@^4.16.4, lodash@^4.2.0, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -3483,7 +3507,7 @@ memory-fs@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.2.0.tgz#f2bb25368bc121e391c2520de92969caee0a0290"
 
-memory-fs@~0.3.0:
+memory-fs@^0.3.0, memory-fs@~0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.3.0.tgz#7bcc6b629e3a43e871d7e29aca6ae8a7f15cbb20"
   dependencies:
@@ -3537,11 +3561,11 @@ mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.7:
   dependencies:
     mime-db "~1.25.0"
 
-mime@1.2.x:
+mime@1.2.x, mime@^1.2.11:
   version "1.2.11"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.2.11.tgz#58203eed86e3a5ef17aed2b7d9ebd47f0a60dd10"
 
-mime@1.3.4, mime@^1.2.11, mime@^1.3.4:
+mime@1.3.4, mime@^1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.3.4.tgz#115f9e3b6b3daf2959983cb38f149a2d40eb5d53"
 
@@ -4834,7 +4858,7 @@ source-map-loader@^0.1.5:
     loader-utils "~0.2.2"
     source-map "~0.1.33"
 
-source-map-support@^0.4.2:
+source-map-support@^0.4.0, source-map-support@^0.4.2:
   version "0.4.8"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.8.tgz#4871918d8a3af07289182e974e32844327b2e98b"
   dependencies:
@@ -5025,6 +5049,10 @@ table@^3.7.8:
 tapable@^0.1.8, tapable@~0.1.8:
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.1.10.tgz#29c35707c2b70e50d07482b5d202e8ed446dafd4"
+
+tapable@^0.2.3:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.2.6.tgz#206be8e188860b514425375e6f1ae89bfb01fd8d"
 
 tar-pack@~3.3.0:
   version "3.3.0"
