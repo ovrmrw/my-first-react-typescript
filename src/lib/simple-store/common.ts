@@ -14,22 +14,34 @@ export interface Action {
 }
 
 
-type ObjectValue<T, K extends keyof T> = T[K]
-type ObjectValueResolver<T, K extends keyof T> = (value: T[K]) => T[K]
+type Value<T, K extends keyof T> =
+  T[K] | Promise<T[K]> | Observable<T[K]>
+type AsyncResolver<T, K extends keyof T> =
+  (Promise<(value: T[K]) => T[K]>) | (Observable<(value: T[K]) => T[K]>)
+type Resolver< T, K extends keyof T> =
+  (value: T[K]) =>
+    T[K] | Promise<T[K]> | Observable<T[K]>
+type ResolverInResolver< T, K extends keyof T> =
+  (value: T[K]) =>
+    ((value: T[K]) => T[K]) | (Promise<(value: T[K]) => T[K]>) | (Observable<(value: T[K]) => T[K]>)
 
 export type ValueOrResolver<T, K extends keyof T> =
-  ObjectValue<T, K> | ObjectValueResolver<T, K> |
-  Promise<ObjectValue<T, K>> | Promise<ObjectValueResolver<T, K>> |
-  Observable<ObjectValue<T, K>> | Observable<ObjectValueResolver<T, K>>
+  Value<T, K> | AsyncResolver<T, K> | Resolver<T, K> | ResolverInResolver<T, K>
 
 
-type PartialObjectValue<T, K extends keyof T> = Partial<T[K]>
-type PartialObjectValueResolver<T, K extends keyof T> = (value: T[K]) => Partial<T[K]>
+type PartialValue<T, K extends keyof T> =
+  Partial<T[K]> | Promise<Partial<T[K]>> | Observable<Partial<T[K]>>
+type PartialAsyncResolver<T, K extends keyof T> =
+  (Promise<(value: T[K]) => Partial<T[K]>>) | (Observable<(value: T[K]) => Partial<T[K]>>)
+type PartialResolver<T, K extends keyof T> =
+  (value: T[K]) =>
+    Partial<T[K]> | Promise<Partial<T[K]>> | Observable<Partial<T[K]>>
+type PartialResolverInResolver<T, K extends keyof T> =
+  (value: T[K]) =>
+    ((value: T[K]) => Partial<T[K]>) | (Promise<(value: T[K]) => Partial<T[K]>>) | (Observable<(value: T[K]) => Partial<T[K]>>)
 
-export type PartialValueOrResolver<T, K extends keyof T> =
-  PartialObjectValue<T, K> | PartialObjectValueResolver<T, K> |
-  Promise<PartialObjectValue<T, K>> | Promise<PartialObjectValueResolver<T, K>> |
-  Observable<PartialObjectValue<T, K>> | Observable<PartialObjectValueResolver<T, K>>
+export type PartialResolverSet<T, K extends keyof T> =
+  PartialValue<T, K> | PartialAsyncResolver<T, K> | PartialResolver<T, K> | PartialResolverInResolver<T, K>
 
 
 export function mergeObject<T>(obj: T, partials: Partial<{[P in keyof T]: T[P]}>[]): T {

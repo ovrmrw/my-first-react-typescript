@@ -29,6 +29,7 @@ export class Increment extends StoreComponent<{}, {}> {
       .then(s => this.store.setter(incrementKey, incrementResolver))
       .then(s => this.store.setter(incrementKey, Promise.resolve({ counter: s.increment.counter + 1 })))
       .then(s => this.store.setter(incrementKey, Promise.resolve(incrementResolver)))
+      .then(s => this.store.setter(incrementKey, () => (q) => ({ counter: q.counter + 1 })))
       .then(s => this.store.setter(lastUpdatedKey, new Date().getTime()))
   }
 
@@ -38,6 +39,7 @@ export class Increment extends StoreComponent<{}, {}> {
       .then(s => this.store.setter(incrementKey, decrementResolver))
       .then(s => this.store.setter(incrementKey, Promise.resolve({ counter: s.increment.counter - 1 })))
       .then(s => this.store.setter(incrementKey, Promise.resolve(decrementResolver)))
+      .then(s => this.store.setter(incrementKey, () => (q) => ({ counter: q.counter - 1 })))
       .then(s => this.store.setter(lastUpdatedKey, new Date().getTime()))
   }
 

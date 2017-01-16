@@ -3,7 +3,7 @@ const asap = require('asap') as (func: Function) => void
 // import { Injectable, NgZone, Inject, Optional } from '@angular/core'
 import { Observable, Subject, BehaviorSubject } from 'rxjs'
 
-import { Action, ValueOrResolver, PartialValueOrResolver, RecursiveReadonly } from './common'
+import { Action, ValueOrResolver, PartialResolverSet, RecursiveReadonly } from './common'
 
 import './add/operator/all'
 
@@ -29,7 +29,18 @@ export class SimpleStore<T> {
   private createStore(): void {
     const queue$ =
       this.simpleStore$
-        .mergeMap(action => {
+        .concatMap(action => { // 外側のコールバックを解決させる。
+          if (action.value instanceof Function) {
+            return this.getterAsPromise()
+              .then(state => {
+                action.value = action.value.call(null, state[action.key])
+                return action
+              })
+          } else {
+            return Promise.resolve(action)
+          }
+        })
+        .mergeMap(action => { // 非同期を解決させる。
           if (action.value instanceof Promise || action.value instanceof Observable) {
             return Observable.from(action.value)
               .mergeMap(value => Observable.of(Object.assign(action, { value })))
@@ -42,12 +53,12 @@ export class SimpleStore<T> {
       queue$
         .scan((state, action) => {
           let temp: any
-          if (action.value instanceof Function) {
+          if (action.value instanceof Function) { // 内側のコールバックを解決させる。
             temp = action.value.call(null, state[action.key])
           } else {
             temp = action.value
           }
-          if (temp instanceof Object && !(temp instanceof Array)) {
+          if (temp instanceof Object && !(temp instanceof Array)) { // valueがオブジェクトの場合はmergeする。
             state[action.key] = { ...state[action.key], ...temp }
           } else {
             state[action.key] = temp
@@ -94,7 +105,7 @@ export class SimpleStore<T> {
   }
 
 
-  setterPartial<K extends keyof T>(key: K, value: PartialValueOrResolver<T, K>): Promise<T> { // TをRecursiveReadonly<T>にするとプロパティ名の一斉リネームが出来なくなる。
+  setterPartial<K extends keyof T>(key: K, value: PartialResolverSet<T, K>): Promise<T> { // TをRecursiveReadonly<T>にするとプロパティ名の一斉リネームが出来なくなる。
     const subject = new Subject<T | RecursiveReadonly<T>>()
     this.simpleStore$.next({ key, value, subject })
     return subject.take(1).toPromise()
