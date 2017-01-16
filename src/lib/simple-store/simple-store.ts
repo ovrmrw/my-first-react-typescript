@@ -3,7 +3,7 @@ const asap = require('asap') as (func: Function) => void
 // import { Injectable, NgZone, Inject, Optional } from '@angular/core'
 import { Observable, Subject, BehaviorSubject } from 'rxjs'
 
-import { Action, ValueOrResolver, PartialResolverSet, RecursiveReadonly } from './common'
+import { Action, ValueOrResolver, PartialValueOrResolver, RecursiveReadonly } from './common'
 
 import './add/operator/all'
 
@@ -105,7 +105,7 @@ export class SimpleStore<T> {
   }
 
 
-  setterPartial<K extends keyof T>(key: K, value: PartialResolverSet<T, K>): Promise<T> { // TをRecursiveReadonly<T>にするとプロパティ名の一斉リネームが出来なくなる。
+  setterPartial<K extends keyof T>(key: K, value: PartialValueOrResolver<T, K>): Promise<T> { // TをRecursiveReadonly<T>にするとプロパティ名の一斉リネームが出来なくなる。
     const subject = new Subject<T | RecursiveReadonly<T>>()
     this.simpleStore$.next({ key, value, subject })
     return subject.take(1).toPromise()

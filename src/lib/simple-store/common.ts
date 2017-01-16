@@ -14,34 +14,36 @@ export interface Action {
 }
 
 
-type Value<T, K extends keyof T> =
-  T[K] | Promise<T[K]> | Observable<T[K]>
-type AsyncResolver<T, K extends keyof T> =
-  (Promise<(value: T[K]) => T[K]>) | (Observable<(value: T[K]) => T[K]>)
-type Resolver< T, K extends keyof T> =
-  (value: T[K]) =>
-    T[K] | Promise<T[K]> | Observable<T[K]>
-type ResolverInResolver< T, K extends keyof T> =
-  (value: T[K]) =>
-    ((value: T[K]) => T[K]) | (Promise<(value: T[K]) => T[K]>) | (Observable<(value: T[K]) => T[K]>)
+type Value<T, K extends keyof T> = T[K]
+type ValueAsync< T, K extends keyof T> = Promise<T[K]> | Observable<T[K]>
+type Resolver< T, K extends keyof T> = (value: T[K]) => T[K]
+type ResolverAsync< T, K extends keyof T> = (value: T[K]) => Promise<T[K]> | Observable<T[K]>
+type ResolverInResolver< T, K extends keyof T> = (value: T[K]) => ((value: T[K]) => T[K])
+type ResolverInResolverAsync< T, K extends keyof T> = (value: T[K]) => (Promise<(value: T[K]) => T[K]>) | (Observable<(value: T[K]) => T[K]>)
+type AsyncWrappedResolver< T, K extends keyof T> =
+  Promise<(value: T[K]) => T[K]> | Observable<(value: T[K]) => T[K]>
 
 export type ValueOrResolver<T, K extends keyof T> =
-  Value<T, K> | AsyncResolver<T, K> | Resolver<T, K> | ResolverInResolver<T, K>
+  Value<T, K> | ValueAsync<T, K> |
+  Resolver<T, K> | ResolverAsync<T, K> |
+  ResolverInResolver<T, K> | ResolverInResolverAsync<T, K> |
+  AsyncWrappedResolver<T, K>
 
 
-type PartialValue<T, K extends keyof T> =
-  Partial<T[K]> | Promise<Partial<T[K]>> | Observable<Partial<T[K]>>
-type PartialAsyncResolver<T, K extends keyof T> =
-  (Promise<(value: T[K]) => Partial<T[K]>>) | (Observable<(value: T[K]) => Partial<T[K]>>)
-type PartialResolver<T, K extends keyof T> =
-  (value: T[K]) =>
-    Partial<T[K]> | Promise<Partial<T[K]>> | Observable<Partial<T[K]>>
-type PartialResolverInResolver<T, K extends keyof T> =
-  (value: T[K]) =>
-    ((value: T[K]) => Partial<T[K]>) | (Promise<(value: T[K]) => Partial<T[K]>>) | (Observable<(value: T[K]) => Partial<T[K]>>)
+type PartialValue<T, K extends keyof T> = Partial<T[K]>
+type PartialValueAsync< T, K extends keyof T> = Promise<Partial<T[K]>> | Observable<Partial<T[K]>>
+type PartialResolver< T, K extends keyof T> = (value: T[K]) => Partial<T[K]>
+type PartialResolverAsync< T, K extends keyof T> = (value: T[K]) => Promise<Partial<T[K]>> | Observable<Partial<T[K]>>
+type PartialResolverInResolver< T, K extends keyof T> = (value: T[K]) => ((value: T[K]) => Partial<T[K]>)
+type PartialResolverInResolverAsync< T, K extends keyof T> = (value: T[K]) => (Promise<(value: T[K]) => Partial<T[K]>>) | (Observable<(value: T[K]) => Partial<T[K]>>)
+type PartialAsyncWrappedResolver< T, K extends keyof T> =
+  Promise<(value: T[K]) => Partial<T[K]>> | Observable<(value: T[K]) => Partial<T[K]>>
 
-export type PartialResolverSet<T, K extends keyof T> =
-  PartialValue<T, K> | PartialAsyncResolver<T, K> | PartialResolver<T, K> | PartialResolverInResolver<T, K>
+export type PartialValueOrResolver<T, K extends keyof T> =
+  PartialValue<T, K> | PartialValueAsync<T, K> |
+  PartialResolver<T, K> | PartialResolverAsync<T, K> |
+  PartialResolverInResolver<T, K> | PartialResolverInResolverAsync<T, K> |
+  PartialAsyncWrappedResolver<T, K>
 
 
 export function mergeObject<T>(obj: T, partials: Partial<{[P in keyof T]: T[P]}>[]): T {
