@@ -18,7 +18,8 @@
       "react": [
         "custom-types/react"
       ]
-    }
+    },
+    "importHelpers": true
   },
   "include": [
     "src/**/*"

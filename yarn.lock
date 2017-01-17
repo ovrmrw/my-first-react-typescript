@@ -180,7 +180,7 @@ arrify@^1.0.0, arrify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
-asap@^2.0.5, asap@~2.0.3:
+asap@^2.0.0, asap@~2.0.3:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.5.tgz#522765b50c3510490e52d7dcfe085ef9ba96958f"
 
@@ -3879,11 +3879,11 @@ osenv@^0.1.0:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
-ovrmrw-reactive-store@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/ovrmrw-reactive-store/-/ovrmrw-reactive-store-0.0.4.tgz#e530c043f974d2467efa885869b70735a9145dde"
+ovrmrw-reactive-store@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/ovrmrw-reactive-store/-/ovrmrw-reactive-store-0.0.5.tgz#35604b5d30f5b75f28a331dd51a1909c4a86b2bc"
   dependencies:
-    asap "^2.0.5"
+    asap "^2.0.0"
     rxjs "^5.0.0"
     tslib "^1.5.0"
 

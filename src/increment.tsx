@@ -2,13 +2,13 @@ import * as React from 'react'
 import { Observable } from 'rxjs'
 
 import { StoreComponent } from './hoc'
-import { IncrementState, incrementKey, lastUpdatedKey } from './store'
+import { KEY, IncrementState } from './state'
 
 
 export class Increment extends StoreComponent<{}, {}> {
   componentDidMount() {
     this.disposable = this.store.getter()
-      .filterByUpdatedKey(incrementKey, lastUpdatedKey)
+      .filterByUpdatedKey(KEY.increment, KEY.lastUpdated)
       .debounceTime(0)
       .subscribe(state => {
         this.setState({
@@ -25,27 +25,27 @@ export class Increment extends StoreComponent<{}, {}> {
 
 
   increment(event): Promise<any> {
-    return this.store.setter(incrementKey, (p) => ({ counter: p.counter + 1 }))
-      .then(s => this.store.setter(incrementKey, incrementResolver))
-      .then(s => this.store.setter(incrementKey, Promise.resolve({ counter: s.increment.counter + 1 })))
-      .then(s => this.store.setter(incrementKey, Promise.resolve(incrementResolver)))
-      .then(s => this.store.setter(incrementKey, () => (q) => ({ counter: q.counter + 1 })))
-      .then(s => this.store.setter(lastUpdatedKey, new Date().getTime()))
+    return this.store.setter(KEY.increment, (p) => ({ counter: p.counter + 1 }))
+      .then(s => this.store.setter(KEY.increment, incrementResolver))
+      .then(s => this.store.setter(KEY.increment, Promise.resolve({ counter: s.increment.counter + 1 })))
+      .then(s => this.store.setter(KEY.increment, Promise.resolve(incrementResolver)))
+      .then(s => this.store.setter(KEY.increment, () => (q) => ({ counter: q.counter + 1 })))
+      .then(s => this.store.setter(KEY.lastUpdated, new Date().getTime()))
   }
 
 
   decrement(event): Promise<any> {
-    return this.store.setter(incrementKey, (p) => ({ counter: p.counter - 1 }))
-      .then(s => this.store.setter(incrementKey, decrementResolver))
-      .then(s => this.store.setter(incrementKey, Promise.resolve({ counter: s.increment.counter - 1 })))
-      .then(s => this.store.setter(incrementKey, Promise.resolve(decrementResolver)))
-      .then(s => this.store.setter(incrementKey, () => (q) => ({ counter: q.counter - 1 })))
-      .then(s => this.store.setter(lastUpdatedKey, new Date().getTime()))
+    return this.store.setter(KEY.increment, (p) => ({ counter: p.counter - 1 }))
+      .then(s => this.store.setter(KEY.increment, decrementResolver))
+      .then(s => this.store.setter(KEY.increment, Promise.resolve({ counter: s.increment.counter - 1 })))
+      .then(s => this.store.setter(KEY.increment, Promise.resolve(decrementResolver)))
+      .then(s => this.store.setter(KEY.increment, () => (q) => ({ counter: q.counter - 1 })))
+      .then(s => this.store.setter(KEY.lastUpdated, new Date().getTime()))
   }
 
 
   reset(event): Promise<any> {
-    return this.store.setter(incrementKey, { counter: 0 })
+    return this.store.setter(KEY.increment, { counter: 0 })
   }
 
 

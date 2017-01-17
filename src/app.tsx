@@ -5,7 +5,7 @@ import './app.css'
 
 import { StoreComponent } from './hoc'
 import { Increment } from './increment'
-import { incrementKey, lastUpdatedKey } from './store'
+import { KEY } from './state'
 
 
 interface ComponentState {
@@ -32,7 +32,7 @@ export class App extends StoreComponent<{}, ComponentState> {
 
   componentDidMount() {
     this.disposable = this.store.getter()
-      .filterByUpdatedKey(incrementKey)
+      .filterByUpdatedKey(KEY.increment)
       .debounceTime(500)
       .subscribe(state => {
         this.setState({
@@ -41,7 +41,7 @@ export class App extends StoreComponent<{}, ComponentState> {
       })
 
     this.disposable = this.store.getter()
-      .filterByUpdatedKey(incrementKey, lastUpdatedKey)
+      .filterByUpdatedKey(KEY.increment, KEY.lastUpdated)
       .scan((p, _) => p + 1, 0)
       .subscribe(times => {
         this.setState({

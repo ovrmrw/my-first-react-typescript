@@ -1,12 +1,13 @@
 import * as React from 'react'
 import { Subscription } from 'rxjs'
+import { getReactiveStoreAsSingleton } from 'ovrmrw-reactive-store'
 
 import { MyReactPureComponent } from './my-react.component'
-import { getStore, initialState, AppState } from '../store'
+import { initialState, AppState } from '../state'
 
 
 export abstract class StoreComponent<P, S> extends MyReactPureComponent<P, AppState & S> {
-  store = getStore()
+  store = getReactiveStoreAsSingleton(initialState)
 
 
   constructor(props?, context?) {
