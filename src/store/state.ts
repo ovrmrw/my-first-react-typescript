@@ -1,4 +1,4 @@
-import { ObjectKey, getObjectKeys } from '../lib/simple-store'
+import { ObjectKey, getObjectKeys } from 'ovrmrw-reactive-store'
 
 
 export const initialState: AppState = {

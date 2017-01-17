@@ -1,13 +1,13 @@
-import { SimpleStore } from '../lib/simple-store'
+import { ReactiveStore } from 'ovrmrw-reactive-store'
 import { initialState, AppState } from './state'
 
 
-let store: SimpleStore<AppState>
+let store: ReactiveStore<AppState>
 
 
-export function getStore(): SimpleStore<AppState> {
+export function getStore(): ReactiveStore<AppState> {
   if (!store) {
-    store = new SimpleStore<AppState>(initialState)
+    store = new ReactiveStore<AppState>(initialState)
   }
   return store
 }
