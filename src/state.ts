@@ -1,4 +1,4 @@
-import { ObjectKey, getObjectKeys } from 'ovrmrw-reactive-store'
+import { getObjectKeys, getReactiveStoreAsSingleton, LoopType } from 'ovrmrw-reactive-store'
 
 
 export const initialState: AppState = {
@@ -10,6 +10,13 @@ export const initialState: AppState = {
 }
 
 export const KEY = getObjectKeys(initialState)
+
+export const storeInstance = getReactiveStoreAsSingleton(initialState, {
+  concurrent: 1,
+  output: true,
+  loopType: LoopType.asap,
+})
+
 
 
 export interface AppState {
