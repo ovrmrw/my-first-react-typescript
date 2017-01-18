@@ -26,21 +26,21 @@ export class Increment extends StoreComponent<{}, {}> {
 
   increment(event): Promise<any> {
     return this.store.setter(KEY.increment, (p) => ({ counter: p.counter + 1 }))
-      .then(s => this.store.setter(KEY.increment, incrementResolver))
-      .then(s => this.store.setter(KEY.increment, Promise.resolve({ counter: s.increment.counter + 1 })))
-      .then(s => this.store.setter(KEY.increment, Promise.resolve(incrementResolver)))
-      .then(s => this.store.setter(KEY.increment, () => (q) => ({ counter: q.counter + 1 })))
-      .then(s => this.store.setter(KEY.lastUpdated, new Date().getTime()))
+      .then(() => this.store.setter(KEY.increment, incrementResolver))
+      .then(() => this.store.setter(KEY.increment, (_, a) => Promise.resolve({ counter: a.increment.counter + 1 })))
+      .then(() => this.store.setter(KEY.increment, Promise.resolve(incrementResolver)))
+      .then(() => this.store.setter(KEY.increment, () => (q) => ({ counter: q.counter + 1 })))
+      .then(() => this.store.setter(KEY.lastUpdated, new Date().getTime()))
   }
 
 
   decrement(event): Promise<any> {
     return this.store.setter(KEY.increment, (p) => ({ counter: p.counter - 1 }))
-      .then(s => this.store.setter(KEY.increment, decrementResolver))
-      .then(s => this.store.setter(KEY.increment, Promise.resolve({ counter: s.increment.counter - 1 })))
-      .then(s => this.store.setter(KEY.increment, Promise.resolve(decrementResolver)))
-      .then(s => this.store.setter(KEY.increment, () => (q) => ({ counter: q.counter - 1 })))
-      .then(s => this.store.setter(KEY.lastUpdated, new Date().getTime()))
+      .then(() => this.store.setter(KEY.increment, decrementResolver))
+      .then(() => this.store.setter(KEY.increment, (_, a) => Promise.resolve({ counter: a.increment.counter - 1 })))
+      .then(() => this.store.setter(KEY.increment, Promise.resolve(decrementResolver)))
+      .then(() => this.store.setter(KEY.increment, () => (q) => ({ counter: q.counter - 1 })))
+      .then(() => this.store.setter(KEY.lastUpdated, new Date().getTime()))
   }
 
 

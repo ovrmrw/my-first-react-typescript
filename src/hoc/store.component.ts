@@ -7,7 +7,7 @@ import { initialState, AppState } from '../state'
 
 
 export abstract class StoreComponent<P, S> extends MyReactPureComponent<P, AppState & S> {
-  store = getReactiveStoreAsSingleton(initialState)
+  store = getReactiveStoreAsSingleton(initialState, 1, true)
 
 
   constructor(props?, context?) {

@@ -3879,9 +3879,9 @@ osenv@^0.1.0:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
-ovrmrw-reactive-store@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/ovrmrw-reactive-store/-/ovrmrw-reactive-store-0.0.5.tgz#35604b5d30f5b75f28a331dd51a1909c4a86b2bc"
+ovrmrw-reactive-store@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/ovrmrw-reactive-store/-/ovrmrw-reactive-store-0.0.8.tgz#bf0fc30684a9623feff2e1680c2a42b8b641ae2e"
   dependencies:
     asap "^2.0.0"
     rxjs "^5.0.0"
