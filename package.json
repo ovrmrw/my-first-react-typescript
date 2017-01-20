@@ -57,7 +57,7 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
-    "ovrmrw-reactive-store": "^0.0.12",
+    "ovrmrw-reactive-store": "^0.0.18",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "rxjs": "^5.0.2",
