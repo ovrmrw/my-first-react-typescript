@@ -6,7 +6,7 @@ import './app.css'
 import { MyReactPureComponent } from './hoc'
 import { Increment } from './increment'
 import { ReactiveStoreService, KEY, AppState } from './state'
-import { lazyInject } from './container'
+import { lazyInject } from './inversify.config'
 
 
 interface ComponentState {
@@ -29,33 +29,23 @@ export class App extends MyReactPureComponent<{}, AppState & ComponentState> {
   store: ReactiveStoreService
 
 
-  constructor(props) {
-    super(props)
-    this.state = { ...this.state, ...this.store.initialState, ...componentState }
-  }
-
-
   componentWillMount() {
+    this.setState({ ...this.state, ...this.store.initialState, ...componentState })
+
     this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment)
       .debounceTime(500)
-      .subscribe(state => {
-        this.setState({
-          increment: state.increment,
-        })
-      })
+      .subscribe(state => this.setState({ ...state }))
 
     this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment, KEY.lastUpdated)
       .scan((p, _) => p + 1, 0)
-      .subscribe(times => {
-        this.setState({
-          updatedTimes: {
-            value: times,
-            visible: times > 9,
-          }
-        })
-      })
+      .subscribe(times => this.setState({
+        updatedTimes: {
+          value: times,
+          visible: times > 9,
+        }
+      }))
   }
 
 
