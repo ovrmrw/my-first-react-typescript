@@ -60,7 +60,7 @@
     "core-js": "^2.4.1",
     "inversify": "^3.0.0",
     "inversify-inject-decorators": "^3.0.1",
-    "ovrmrw-reactive-store": "^0.0.28",
+    "ovrmrw-reactive-store": "^0.0.29",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "rxjs": "^5.0.2",

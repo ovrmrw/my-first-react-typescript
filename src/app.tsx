@@ -31,7 +31,7 @@ export class App extends MyReactPureComponent<{}, AppState & ComponentState> {
 
   constructor(props) {
     super(props)
-    this.state = { ...this.state, ...this.store.getInitialState(), ...componentState }
+    this.state = { ...this.state, ...this.store.initialState, ...componentState }
   }
 
 

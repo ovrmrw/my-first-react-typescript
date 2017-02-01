@@ -12,7 +12,7 @@ export class Increment extends MyReactPureComponent<{}, AppState> {
 
   constructor(props) {
     super(props)
-    this.state = { ...this.state, ...this.store.getInitialState() }
+    this.state = { ...this.state, ...this.store.initialState }
   }
 
 
