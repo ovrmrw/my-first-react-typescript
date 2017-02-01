@@ -29,15 +29,20 @@ export class App extends MyReactPureComponent<{}, AppState & ComponentState> {
   store: ReactiveStoreService
 
 
-  componentWillMount() {
-    this.store.getter().take(1).subscribe(state => this.setState({ ...state, ...componentState }))
+  constructor(props) {
+    super(props)
+    this.state = { ...this.state, ...this.store.getInitialState(), ...componentState }
+  }
 
+
+  componentWillMount() {
     this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment)
       .debounceTime(500)
       .subscribe(state => {
-        this.setState({ ...state })
-        this.forceUpdate()
+        this.setState({
+          increment: state.increment,
+        })
       })
 
     this.disposable = this.store.getter()
@@ -50,7 +55,6 @@ export class App extends MyReactPureComponent<{}, AppState & ComponentState> {
             visible: times > 9,
           }
         })
-        this.forceUpdate()
       })
   }
 

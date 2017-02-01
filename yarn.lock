@@ -3891,9 +3891,9 @@ osenv@^0.1.0:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
-ovrmrw-reactive-store@^0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/ovrmrw-reactive-store/-/ovrmrw-reactive-store-0.0.26.tgz#e049f40d2991e72e0393a1ce719aaf5688cc84b2"
+ovrmrw-reactive-store@^0.0.28:
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/ovrmrw-reactive-store/-/ovrmrw-reactive-store-0.0.28.tgz#f6fd5b9e7cd2ea14e58e58552dde5b2bfa32a2ea"
   dependencies:
     asap "^2.0.5"
     lodash.clonedeep "^4.5.0"
