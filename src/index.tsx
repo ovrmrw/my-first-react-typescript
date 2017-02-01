@@ -1,4 +1,4 @@
-import 'reflect-metadata'
+import 'core-js/es7/reflect'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 

@@ -17,10 +17,8 @@ export class Increment extends MyReactPureComponent<{}, AppState> {
       .filterByUpdatedKey(KEY.increment, KEY.lastUpdated)
       .debounceTime(0)
       .subscribe(state => {
-        this.setState({
-          increment: state.increment,
-          lastUpdated: state.lastUpdated,
-        })
+        this.setState({ ...state })
+        this.forceUpdate()
       })
   }
 

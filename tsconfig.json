@@ -6,13 +6,11 @@
     "target": "es5",
     "jsx": "react",
     "lib": [
-      "es5",
       "es2017",
       "dom"
     ],
     "typeRoots": [
-      "node_modules/@types",
-      "node_modules/reflect-metadata"
+      "node_modules/@types"
     ],
     "baseUrl": "",
     "paths": {
@@ -20,7 +18,7 @@
         "custom-types/react"
       ]
     },
-    "importHelpers": false,
+    "importHelpers": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },

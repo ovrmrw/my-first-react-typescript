@@ -10,12 +10,12 @@ export abstract class MyReactPureComponent<P, S> extends React.PureComponent<P, 
   }
 
 
-  mergeStatesOnConstructor(...states: Partial<S>[]): void {
-    const tempState = states.reduce((p, s) => {
-      return { ...p, ...s as any }
-    }, {})
-    this.state = { ...this.state as any, ...tempState }
-  }
+  // mergeStatesOnConstructor(...states: Partial<S>[]): void {
+  //   const tempState = states.reduce((p, s) => {
+  //     return { ...p, ...s as any }
+  //   }, {})
+  //   this.state = { ...this.state as any, ...tempState }
+  // }
 
 
   disposeSubscriptions(): void {

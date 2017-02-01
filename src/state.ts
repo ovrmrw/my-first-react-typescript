@@ -1,6 +1,4 @@
-import { injectable } from 'inversify'
 import { ReactiveStore, getObjectKeys, getReactiveStoreAsSingleton, LoopType } from 'ovrmrw-reactive-store'
-// import { provide } from './container'
 
 
 export const initialState: AppState = {
@@ -11,15 +9,17 @@ export const initialState: AppState = {
   other: 0,
 }
 
+
 export const KEY = getObjectKeys(initialState)
 
 export const storeInstance = getReactiveStoreAsSingleton(initialState, {
-  concurrent: 1,
+  concurrent: Number.POSITIVE_INFINITY,
   output: true,
-  loopType: LoopType.asap,
+  useFreeze: true,
 })
 
 export class ReactiveStoreService extends ReactiveStore<AppState> { }
+
 
 
 export interface AppState {

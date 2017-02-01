@@ -36,9 +36,8 @@ export class App extends MyReactPureComponent<{}, AppState & ComponentState> {
       .filterByUpdatedKey(KEY.increment)
       .debounceTime(500)
       .subscribe(state => {
-        this.setState({
-          increment: state.increment,
-        })
+        this.setState({ ...state })
+        this.forceUpdate()
       })
 
     this.disposable = this.store.getter()
@@ -51,6 +50,7 @@ export class App extends MyReactPureComponent<{}, AppState & ComponentState> {
             visible: times > 9,
           }
         })
+        this.forceUpdate()
       })
   }
 
