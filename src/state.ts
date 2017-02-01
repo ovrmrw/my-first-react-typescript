@@ -1,4 +1,5 @@
 import { ReactiveStore, getObjectKeys, getReactiveStoreAsSingleton, LoopType } from 'ovrmrw-reactive-store'
+export { ReactiveStore }
 
 
 export const initialState: AppState = {
@@ -18,7 +19,7 @@ export const storeInstance = getReactiveStoreAsSingleton(initialState, {
   // useFreeze: true,
 })
 
-export class ReactiveStoreService extends ReactiveStore<AppState> { }
+// export class ReactiveStoreService extends ReactiveStore<AppState> { }
 
 
 

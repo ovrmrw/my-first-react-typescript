@@ -1,13 +1,13 @@
 import * as React from 'react'
 
 import { MyReactPureComponent } from './hoc'
-import { ReactiveStoreService, KEY, AppState, IncrementState } from './state'
+import { ReactiveStore, KEY, AppState, IncrementState } from './state'
 import { lazyInject } from './inversify.config'
 
 
 export class Increment extends MyReactPureComponent<{}, AppState> {
-  @lazyInject(ReactiveStoreService)
-  store: ReactiveStoreService
+  @lazyInject(ReactiveStore)
+  store: ReactiveStore<AppState>
 
 
   componentWillMount() {

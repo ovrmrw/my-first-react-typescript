@@ -1,10 +1,10 @@
-import { Container } from 'inversify'
+import { Container, decorate, injectable } from 'inversify'
 import getDecorators from 'inversify-inject-decorators'
 
-import { ReactiveStoreService, storeInstance } from './state'
+import { ReactiveStore, storeInstance } from './state'
 
 
 const container = new Container({ defaultScope: 'Singleton' })
-container.bind(ReactiveStoreService).toConstantValue(storeInstance)
+container.bind(ReactiveStore).toConstantValue(storeInstance)
 
 export const { lazyInject } = getDecorators(container)

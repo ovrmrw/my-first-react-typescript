@@ -18,7 +18,7 @@
         "custom-types/react"
       ]
     },
-    "importHelpers": true,
+    "importHelpers": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },

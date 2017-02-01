@@ -63,6 +63,7 @@
     "ovrmrw-reactive-store": "^0.0.30",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
+    "reflect-metadata": "^0.1.9",
     "rxjs": "^5.0.2",
     "tslib": "^1.5.0"
   },
