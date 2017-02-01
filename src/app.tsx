@@ -3,9 +3,10 @@ import * as React from 'react'
 const logo = require('./logo.svg')
 import './app.css'
 
-import { StoreComponent } from './hoc'
+import { MyReactPureComponent } from './hoc'
 import { Increment } from './increment'
-import { KEY } from './state'
+import { ReactiveStoreService, KEY, AppState } from './state'
+import { lazyInject } from './container'
 
 
 interface ComponentState {
@@ -23,14 +24,14 @@ const componentState: ComponentState = {
 }
 
 
-export class App extends StoreComponent<{}, ComponentState> {
-  constructor(props) {
-    super(props)
-    this.mergeStatesOnConstructor(componentState)
-  }
+export class App extends MyReactPureComponent<{}, AppState & ComponentState> {
+  @lazyInject(ReactiveStoreService)
+  store: ReactiveStoreService
 
 
-  componentDidMount() {
+  componentWillMount() {
+    this.store.getter().take(1).subscribe(state => this.setState({ ...state, ...componentState }))
+
     this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment)
       .debounceTime(500)

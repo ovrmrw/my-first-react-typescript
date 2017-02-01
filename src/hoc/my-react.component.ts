@@ -23,7 +23,7 @@ export abstract class MyReactPureComponent<P, S> extends React.PureComponent<P, 
   }
 
 
-  abstract componentDidMount()
+  abstract componentWillMount()
 
   abstract componentWillUnmount()
 

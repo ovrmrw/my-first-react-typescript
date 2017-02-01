@@ -11,7 +11,8 @@
       "dom"
     ],
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "node_modules/reflect-metadata"
     ],
     "baseUrl": "",
     "paths": {
@@ -19,7 +20,9 @@
         "custom-types/react"
       ]
     },
-    "importHelpers": true
+    "importHelpers": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": [
     "src/**/*"

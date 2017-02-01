@@ -1,12 +1,18 @@
 import * as React from 'react'
-import { Observable } from 'rxjs'
 
-import { StoreComponent } from './hoc'
-import { KEY, IncrementState } from './state'
+import { MyReactPureComponent } from './hoc'
+import { ReactiveStoreService, KEY, AppState, IncrementState } from './state'
+import { lazyInject } from './container'
 
 
-export class Increment extends StoreComponent<{}, {}> {
-  componentDidMount() {
+export class Increment extends MyReactPureComponent<{}, AppState> {
+  @lazyInject(ReactiveStoreService)
+  store: ReactiveStoreService
+
+
+  componentWillMount() {
+    this.store.getter().take(1).subscribe(state => this.setState({ ...state }))
+
     this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment, KEY.lastUpdated)
       .debounceTime(0)
