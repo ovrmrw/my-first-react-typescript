@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Subscription } from 'rxjs'
+import { Subscription } from 'rxjs/Subscription'
 
 
 export abstract class MyReactPureComponent<P, S> extends React.PureComponent<P, S> {

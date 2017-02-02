@@ -24,6 +24,7 @@ const componentState: ComponentState = {
 }
 
 
+
 export class App extends MyReactPureComponent<{}, AppState & ComponentState> {
   @lazyInject(ReactiveStore)
   store: ReactiveStore<AppState>

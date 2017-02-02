@@ -5,6 +5,7 @@ import { ReactiveStore, KEY, AppState, IncrementState } from './state'
 import { lazyInject } from './inversify.config'
 
 
+
 export class Increment extends MyReactPureComponent<{}, AppState> {
   @lazyInject(ReactiveStore)
   store: ReactiveStore<AppState>
