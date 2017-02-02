@@ -4,6 +4,8 @@
   "private": true,
   "devDependencies": {
     "@types/bluebird": "^3.0.37",
+    "@types/enzyme": "^2.7.2",
+    "@types/jest": "^18.1.1",
     "@types/node": "^6.0.57",
     "@types/react": "^0.14.57",
     "@types/react-dom": "^0.14.20",
@@ -21,6 +23,7 @@
     "css-loader": "0.26.0",
     "detect-port": "1.0.1",
     "dotenv": "2.0.0",
+    "enzyme": "^2.7.1",
     "eslint": "3.8.1",
     "eslint-config-react-app": "^0.5.0",
     "eslint-loader": "1.6.0",
@@ -36,18 +39,20 @@
     "gzip-size": "3.0.0",
     "html-webpack-plugin": "2.24.0",
     "http-proxy-middleware": "0.17.2",
-    "jest": "17.0.2",
+    "jest": "^18.1.0",
     "json-loader": "0.5.4",
     "light-ts-loader": "^1.1.0",
     "object-assign": "4.1.0",
     "path-exists": "2.1.0",
     "postcss-loader": "1.0.0",
     "promise": "7.1.1",
+    "react-addons-test-utils": "^15.4.2",
     "react-dev-utils": "^0.4.2",
     "recursive-readdir": "2.1.0",
     "source-map-loader": "^0.1.5",
     "strip-ansi": "3.0.1",
     "style-loader": "0.13.1",
+    "ts-jest": "^18.0.2",
     "tslint": "^4.3.1",
     "typescript": "^2.1.5",
     "url-loader": "0.5.7",
@@ -89,12 +94,20 @@
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js",
       "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>\\config\\jest\\cssTransform.js",
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>\\config\\jest\\fileTransform.js"
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
     ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"

@@ -16,6 +16,9 @@
     "paths": {
       "react": [
         "custom-types/react"
+      ],
+      "enzyme": [
+        "custom-types/enzyme"
       ]
     },
     "importHelpers": false,
