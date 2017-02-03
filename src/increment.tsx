@@ -2,8 +2,7 @@ import * as React from 'react'
 
 import { MyReactPureComponent } from './hoc'
 import { ReactiveStore, KEY, AppState, IncrementState } from './state'
-import { lazyInject } from './inversify.config'
-
+import { lazyInject, lazyMultiInject } from './inversify.config'
 
 
 export class Increment extends MyReactPureComponent<{}, AppState> {

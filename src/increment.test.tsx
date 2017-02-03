@@ -3,7 +3,7 @@ import { shallow, mount, render, ShallowWrapper } from 'enzyme'
 
 import { Increment } from './increment'
 import { ReactiveStore, AppState } from './state'
-import { rootContainer } from './inversify.config'
+import { container } from './inversify.config'
 
 
 const initialState: AppState = {
@@ -14,8 +14,8 @@ const initialState: AppState = {
   other: 0,
 }
 
-rootContainer.unbind(ReactiveStore)
-rootContainer.bind(ReactiveStore).toConstantValue(new ReactiveStore(initialState, { output: false, testing: true }))
+
+jest.useFakeTimers()
 
 
 describe('Increment component test', () => {
@@ -24,12 +24,11 @@ describe('Increment component test', () => {
 
 
   beforeEach(async () => {
+    container.unbind(ReactiveStore)
+    container.bind(ReactiveStore).toConstantValue(new ReactiveStore(initialState, { output: false, testing: true }))
+
     wrapper = shallow(<Increment />)
     instance = wrapper.instance() as Increment
-  })
-
-
-  afterEach(async () => {
     await instance.store.forceResetForTesting()
   })
 
@@ -41,8 +40,7 @@ describe('Increment component test', () => {
 
   it('increment', async () => {
     await instance.increment(null)
-
-    await new Promise(setTimeout)
+    jest.runAllTimers()
     expect(instance.state.increment.counter).toBe(105)
     expect(wrapper.find('h1').text()).toBe('105')
   })
@@ -50,8 +48,7 @@ describe('Increment component test', () => {
 
   it('decrement', async () => {
     await instance.decrement(null)
-
-    await new Promise(setTimeout)
+    jest.runAllTimers()
     expect(instance.state.increment.counter).toBe(95)
     expect(wrapper.find('h1').text()).toBe('95')
   })
@@ -61,8 +58,7 @@ describe('Increment component test', () => {
     await instance.increment(null)
     await instance.increment(null)
     await instance.reset(null)
-
-    await new Promise(setTimeout)
+    jest.runAllTimers()
     expect(instance.state.increment.counter).toBe(100)
     expect(wrapper.find('h1').text()).toBe('100')
   })
