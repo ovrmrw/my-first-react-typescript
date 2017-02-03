@@ -56,7 +56,7 @@ export class Increment extends MyReactPureComponent<{}, AppState> {
 
     return (
       <div>
-        <button onClick={(e) => this.increment(e)}>Increment</button>
+        <button className="increment" onClick={(e) => this.increment(e)}>Increment</button>
         <button onClick={(e) => this.decrement(e)}>Decrement</button>
         <button onClick={(e) => this.reset(e)}>Reset</button>
         <h1>{s.increment.counter}</h1>

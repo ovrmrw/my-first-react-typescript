@@ -8,4 +8,5 @@ const container = new Container({ defaultScope: 'Singleton' })
 container.bind(ReactiveStore).toConstantValue(storeInstance)
 
 
+export const rootContainer = container
 export const { lazyInject } = getDecorators(container)
