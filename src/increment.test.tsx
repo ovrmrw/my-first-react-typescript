@@ -14,6 +14,9 @@ const initialState: AppState = {
   other: 0,
 }
 
+container.unbind(ReactiveStore)
+container.bind(ReactiveStore).toConstantValue(new ReactiveStore(initialState, { output: false, testing: true }))
+
 
 jest.useFakeTimers()
 
@@ -24,9 +27,6 @@ describe('Increment component test', () => {
 
 
   beforeEach(async () => {
-    container.unbind(ReactiveStore)
-    container.bind(ReactiveStore).toConstantValue(new ReactiveStore(initialState, { output: false, testing: true }))
-
     wrapper = shallow(<Increment />)
     instance = wrapper.instance() as Increment
     await instance.store.forceResetForTesting()
@@ -38,7 +38,14 @@ describe('Increment component test', () => {
   })
 
 
-  it('increment', async () => {
+  it('increment function is called with button click', async () => {
+    instance.increment = jest.fn()
+    wrapper.find('button.increment').simulate('click')
+    expect(instance.increment).toBeCalled()
+  })
+
+
+  it('increment function is executed', async () => {
     await instance.increment(null)
     jest.runAllTimers()
     expect(instance.state.increment.counter).toBe(105)
@@ -46,7 +53,14 @@ describe('Increment component test', () => {
   })
 
 
-  it('decrement', async () => {
+  it('decrement function is called with button click', async () => {
+    instance.decrement = jest.fn()
+    wrapper.find('button.decrement').simulate('click')
+    expect(instance.decrement).toBeCalled()
+  })
+
+
+  it('decrement function is executed', async () => {
     await instance.decrement(null)
     jest.runAllTimers()
     expect(instance.state.increment.counter).toBe(95)
@@ -54,7 +68,14 @@ describe('Increment component test', () => {
   })
 
 
-  it('reset', async () => {
+  it('reset function is called with button click', async () => {
+    instance.reset = jest.fn()
+    wrapper.find('button.reset').simulate('click')
+    expect(instance.reset).toBeCalled()
+  })
+
+
+  it('reset function is executed', async () => {
     await instance.increment(null)
     await instance.increment(null)
     await instance.reset(null)

@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { MyReactPureComponent } from './hoc'
 import { ReactiveStore, KEY, AppState, IncrementState } from './state'
-import { lazyInject, lazyMultiInject } from './inversify.config'
+import { lazyInject } from './inversify.config'
 
 
 export class Increment extends MyReactPureComponent<{}, AppState> {
@@ -56,8 +56,8 @@ export class Increment extends MyReactPureComponent<{}, AppState> {
     return (
       <div>
         <button className="increment" onClick={(e) => this.increment(e)}>Increment</button>
-        <button onClick={(e) => this.decrement(e)}>Decrement</button>
-        <button onClick={(e) => this.reset(e)}>Reset</button>
+        <button className="decrement" onClick={(e) => this.decrement(e)}>Decrement</button>
+        <button className="reset" onClick={(e) => this.reset(e)}>Reset</button>
         <h1>{s.increment.counter}</h1>
         <div>lastUpdated: {s.lastUpdated}</div>
       </div>
