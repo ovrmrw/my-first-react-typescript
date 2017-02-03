@@ -86,28 +86,24 @@
       "src/**/*.{js,jsx,ts,tsx}"
     ],
     "setupFiles": [
-      "<rootDir>\\config\\polyfills.js"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>[/\\\\](build|docs|node_modules)[/\\\\]"
+      "<rootDir>/config/polyfills.js"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>\\config\\jest\\cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json|ts|tsx)$)": "<rootDir>\\config\\jest\\fileTransform.js",
-      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json|tsx?)$)": "<rootDir>/config/jest/fileTransform.js",
+      "^.+\\.(tsx?)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$",
+    "testRegex": "/src/.*(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
     "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
       "ts",
-      "tsx",
-      "js"
+      "tsx"
     ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
