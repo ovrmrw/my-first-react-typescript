@@ -30,9 +30,13 @@ export class App extends MyReactPureComponent<{}, AppState & ComponentState> {
   store: ReactiveStore<AppState>
 
 
-  componentWillMount() {
-    this.setState({ ...this.state, ...this.store.initialState, ...componentState })
+  constructor(props) {
+    super(props)
+    this.state = { ...this.store.initialState, ...componentState }
+  }
 
+
+  componentWillMount() {
     this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment)
       .debounceTime(500)

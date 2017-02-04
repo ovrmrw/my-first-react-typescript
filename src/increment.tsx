@@ -10,9 +10,13 @@ export class Increment extends MyReactPureComponent<{}, AppState> {
   store: ReactiveStore<AppState>
 
 
-  componentWillMount() {
-    this.setState({ ...this.state, ...this.store.initialState })
+  constructor(props) {
+    super(props)
+    this.state = { ...this.store.initialState }
+  }
 
+
+  componentWillMount() {
     this.disposable = this.store.getter()
       .filterByUpdatedKey(KEY.increment, KEY.lastUpdated)
       .debounceTime(0)

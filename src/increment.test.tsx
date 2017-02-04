@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { shallow, mount, render, ShallowWrapper } from 'enzyme'
+import { shallow, mount, render, ShallowWrapper, ReactWrapper } from 'enzyme'
 
 import { Increment } from './increment'
 import { ReactiveStore, AppState } from './state'
@@ -14,27 +14,39 @@ const initialState: AppState = {
   other: 0,
 }
 
-container.unbind(ReactiveStore)
-container.bind(ReactiveStore).toConstantValue(new ReactiveStore(initialState, { output: false, testing: true }))
-
 
 jest.useFakeTimers()
 
 
+test('componentWillMount is called', () => {
+  const original = Increment.prototype.componentWillMount
+  Increment.prototype.componentWillMount = jest.fn()
+  shallow(<Increment />)
+  expect(Increment.prototype.componentWillMount).toBeCalled()
+  Increment.prototype.componentWillMount = original
+})
+
+
 describe('Increment component test', () => {
-  let wrapper: ShallowWrapper<any, any>
+  let wrapper: ReactWrapper<any, any>
   let instance: Increment
 
 
-  beforeEach(async () => {
-    wrapper = shallow(<Increment />)
+  beforeEach(() => {
+    container.bind(ReactiveStore).toConstantValue(new ReactiveStore(initialState, { testing: true }))
+
+    wrapper = mount(<Increment />)
     instance = wrapper.instance() as Increment
-    await instance.store.forceResetForTesting()
+  })
+
+
+  afterEach(() => {
+    container.unbind(ReactiveStore)
   })
 
 
   it('renders without crashing', () => {
-    shallow(<Increment />)
+    expect(wrapper.length).toBe(1)
   })
 
 
@@ -47,7 +59,7 @@ describe('Increment component test', () => {
 
   it('increment function is executed', async () => {
     await instance.increment(null)
-    jest.runAllTimers()
+    jest.runTimersToTime(0)
     expect(instance.state.increment.counter).toBe(105)
     expect(wrapper.find('h1').text()).toBe('105')
   })
@@ -62,7 +74,7 @@ describe('Increment component test', () => {
 
   it('decrement function is executed', async () => {
     await instance.decrement(null)
-    jest.runAllTimers()
+    jest.runTimersToTime(0)
     expect(instance.state.increment.counter).toBe(95)
     expect(wrapper.find('h1').text()).toBe('95')
   })
@@ -79,7 +91,7 @@ describe('Increment component test', () => {
     await instance.increment(null)
     await instance.increment(null)
     await instance.reset(null)
-    jest.runAllTimers()
+    jest.runTimersToTime(0)
     expect(instance.state.increment.counter).toBe(100)
     expect(wrapper.find('h1').text()).toBe('100')
   })

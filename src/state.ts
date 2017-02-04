@@ -19,8 +19,6 @@ export const storeInstance = getReactiveStoreAsSingleton(initialState, {
   // useFreeze: true,
 })
 
-// export class ReactiveStoreService extends ReactiveStore<AppState> { }
-
 
 
 export interface AppState {

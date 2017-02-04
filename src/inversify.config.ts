@@ -4,9 +4,10 @@ import getDecorators from 'inversify-inject-decorators'
 import { ReactiveStore, storeInstance } from './state'
 
 
-const container = new Container({ defaultScope: 'Singleton' })
-container.bind(ReactiveStore).toConstantValue(storeInstance)
+const rootContainer = new Container()
+rootContainer.bind(ReactiveStore).toConstantValue(storeInstance)
 
+
+export const container = rootContainer.createChild()
 
 export const { lazyInject, lazyMultiInject } = getDecorators(container)
-export { container }

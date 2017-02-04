@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import 'rxjs'
 
 import * as React from 'react'

@@ -65,7 +65,7 @@
     "core-js": "^2.4.1",
     "inversify": "^3.0.0",
     "inversify-inject-decorators": "^3.0.1",
-    "ovrmrw-reactive-store": "^0.0.31",
+    "ovrmrw-reactive-store": "^0.0.32",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "reflect-metadata": "^0.1.9",
@@ -75,40 +75,12 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
+    "test": "node scripts/test.js --config=jest.config.json",
     "tsc": "tsc",
     "lint": "tslint --type-check \"src/**/*.ts\" \"src/**/*.tsx\" ",
     "deploy": "npm run build && gh-pages -d build"
   },
   "homepage": "https://ovrmrw.github.io/my-first-react-typescript",
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
-    "testEnvironment": "node",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json|tsx?)$)": "<rootDir>/config/jest/fileTransform.js",
-      "^.+\\.(tsx?)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "/src/.*(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "ts",
-      "tsx"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web"
-    }
-  },
   "babel": {
     "presets": [
       "react-app"
