@@ -74,18 +74,18 @@ describe('App component & Actions test', () => {
 
 
   it('welcome message is updated with delay', async () => {
-    await actions.incrementCounter()
-    jest.runTimersToTime(0)
     expect(wrapper.find('h2').text()).toBe('Welcome to React 100')
-    jest.runTimersToTime(400)
+
+    await actions.incrementCounter()
+    jest.runTimersToTime(499)
     expect(wrapper.find('h2').text()).not.toBe('Welcome to React 105')
-    jest.runTimersToTime(100)
+    jest.runTimersToTime(1)
     expect(wrapper.find('h2').text()).toBe('Welcome to React 105')
 
     await actions.incrementCounter()
-    jest.runTimersToTime(400)
+    jest.runTimersToTime(499)
     expect(wrapper.find('h2').text()).not.toBe('Welcome to React 110')
-    jest.runTimersToTime(100)
+    jest.runTimersToTime(1)
     expect(wrapper.find('h2').text()).toBe('Welcome to React 110')
   })
 })
