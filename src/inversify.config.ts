@@ -1,4 +1,4 @@
-import { Container, decorate, injectable } from 'inversify'
+import { Container } from 'inversify'
 import getDecorators from 'inversify-inject-decorators'
 
 import { ReactiveStore, storeInstance } from './state'
