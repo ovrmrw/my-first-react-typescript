@@ -15,8 +15,9 @@ export const KEY = getObjectKeys(initialState)
 
 export const storeInstance = getReactiveStoreAsSingleton(initialState, {
   concurrent: Number.POSITIVE_INFINITY,
-  output: true,
+  // output: true,
   // useFreeze: true,
+  useReduxDevToolsExtension: true,
 })
 
 
